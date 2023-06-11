@@ -51,5 +51,21 @@ export default {
         }
       ]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'comments.0.comment',
+      authorName: 'author.name',
+      authorEmail: 'author.email',
+      media: 'photo'
+    },
+    prepare(selection) {
+      const { title, authorName, authorEmail, media } = selection;
+      return {
+        title,
+        subtitle: `by ${authorName} (${authorEmail})`,
+        media,
+      }
+    }
+  }
 }
