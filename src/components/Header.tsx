@@ -3,36 +3,53 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 
+import { HomeIcon, HomeFillIcon, SearchIcon, SearchFillIcon, NewIcon, NewFillIcon } from './ui/icons'
 
-import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
-import { BsPlusSquare, BsPlusSquareFill } from 'react-icons/bs';
-import { RiSearchLine, RiSearchFill } from 'react-icons/ri';
+const menu = [
+  {
+    href: '/',
+    title: '홈',
+    icon: <HomeIcon />,
+    clickedIcon: <HomeFillIcon />,
+  },
+  {
+    href: '/search',
+    title: '검색',
+    icon: <SearchIcon />,
+    clickedIcon: <SearchFillIcon />,
+  },
+  {
+    href: '/new',
+    title: '만들기',
+    icon: <NewIcon />,
+    clickedIcon: <NewFillIcon />,
+  },
+]
 
 export default function Header() {
   const pathname = usePathname();
 
   return (
     <div className='w-1/5 max-w-sm h-screen	p-6 border border-r-gray-200'>
-      <h1 className='mt-4 mb-9 text-2xl font-bold'>Instantgram</h1>
-      <nav className=''>
-        <Link className='flex items-center text-lg py-3' href='/'>
-          {pathname == "/"
-            ? <><AiFillHome className='mr-3' size='24' /><span className='font-bold'>홈</span></>
-            : <><AiOutlineHome className='mr-3' size='24' /><span>홈</span></>
+      <Link href='/'>
+        <h1 className='mt-4 mb-9 text-2xl font-bold'>Instantgram</h1>
+      </Link>
+
+      <nav>
+
+        <ul>
+          {
+            menu.map(item => <li key={item.href}>
+              <Link className='flex items-center text-lg py-3' href={item.href}>
+                {pathname == item.href
+                  ? item.clickedIcon
+                  : item.icon
+                }
+                <span className='font-semibold'>{item.title}</span>
+              </Link>
+            </li>)
           }
-        </Link>
-        <Link className='flex items-center text-lg py-3' href='/search'>
-          {pathname == "/search"
-            ? <><RiSearchFill className='mr-3' size='24' /><span className='font-bold'>검색</span></>
-            : <><RiSearchLine className='mr-3' size='24' /><span>검색</span></>
-          }
-        </Link>
-        <Link className='flex items-center text-lg py-3' href='/new'>
-          {pathname == "/new"
-            ? <><BsPlusSquareFill className='mr-3' size='24' /><span className='font-bold'>만들기</span></>
-            : <><BsPlusSquare className='mr-3' size='24' /><span>만들기</span></>
-          }
-        </Link>
+        </ul>
       </nav>
       <Link className='flex items-center text-lg py-3' href='/'>
         Sign in
