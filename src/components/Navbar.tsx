@@ -26,7 +26,7 @@ const menu = [
   },
 ]
 
-export default function Header() {
+export default function Navbar() {
   const pathname = usePathname();
 
   return (
