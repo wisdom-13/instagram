@@ -51,7 +51,7 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-      <Link className='flex items-center text-lg py-3' href='/'>
+      <Link className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href='/'>
         Sign in
       </Link>
     </div>
