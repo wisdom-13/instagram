@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 import { HomeIcon, HomeFillIcon, SearchIcon, SearchFillIcon, NewIcon, NewFillIcon } from './ui/icons'
 
@@ -28,6 +29,7 @@ const menu = [
 
 export default function Header() {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
     <div className='flex flex-col justify-between w-1/5 max-w-sm h-screen	p-6 border border-r-gray-200'>
@@ -51,9 +53,18 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-      <Link className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href='/'>
-        Sign in
-      </Link>
+      {
+        session ? (
+          <button className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' onClick={() => signOut()}>
+            Sign out
+          </button>
+        ) : (
+          <button className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' onClick={() => signIn()}>
+            Sign in
+          </button>
+        )
+      }
+
     </div>
   );
 }
