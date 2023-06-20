@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className='flex'>
         <AuthContext>
           <Navbar />
-          <section className={`${inter.className} bg-gray-50 w-full`}>{children}</section>
+          <section className={`${inter.className} flex bg-gray-50 w-full`}>{children}</section>
         </AuthContext>
       </body>
     </html>
