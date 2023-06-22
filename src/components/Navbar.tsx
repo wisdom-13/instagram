@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useSession, signIn, signOut } from "next-auth/react"
 
 import { HomeIcon, HomeFillIcon, SearchIcon, SearchFillIcon, NewIcon, NewFillIcon } from './ui/icons'
+import Avatar from './Avatar';
 
 const menu = [
   {
@@ -30,6 +31,7 @@ const menu = [
 export default function Header() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  const user = session?.user;
 
   return (
     <div className='flex flex-col justify-between w-1/5 max-w-sm h-screen	p-6 border border-r-gray-200'>
@@ -40,15 +42,24 @@ export default function Header() {
         <nav>
           <ul>
             {
-              menu.map(item => <li key={item.href}>
-                <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={item.href}>
-                  {pathname == item.href
-                    ? item.clickedIcon
-                    : item.icon
-                  }
-                  <span className='font-semibold'>{item.title}</span>
+              menu.map(item =>
+                <li key={item.href}>
+                  <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={item.href}>
+                    {pathname == item.href
+                      ? item.clickedIcon
+                      : item.icon
+                    }
+                    <span className='font-semibold'>{item.title}</span>
+                  </Link>
+                </li>)
+            }
+            {user &&
+              <li>
+                <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={`/user/${user.username}`}>
+                  <Avatar image={user.image} />
+                  <span className='font-semibold'>프로필</span>
                 </Link>
-              </li>)
+              </li>
             }
           </ul>
         </nav>
