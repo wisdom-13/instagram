@@ -1,6 +1,6 @@
 type Props = { image?: string | null };
 
-export default function Avatar({ image }: Props) {
+export default function Avatar({ image }: Props, size: string) {
   return (
     <div className="w-6 h-6 rounded-full mr-3 group-hover:scale-105">
       {/* eslint-disable-next-line @next/next/no-img-element*/}
