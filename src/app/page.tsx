@@ -19,6 +19,7 @@ export default function Home() {
             <PostList />
           </div>
           <div>
+프로필
             <Profile user={user} />
           </div>
         </div>
