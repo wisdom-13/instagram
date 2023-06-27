@@ -1,24 +1,25 @@
-import { User } from "next-auth";
+
+import { User } from "@/model/user";
 import Avatar from "./Avatar";
 
 type Props = {
   user: User;
 }
 
-export default function Profile({ user }: Props) {
+export default function SideBar({ user }: Props) {
   return (
-    <div className="">
+    <div className="w-[320px]">
       <div className="flex items-center">
-        <Avatar size='xl' image={user.image} />
+        {user.image && <Avatar image={user.image} />}
         <div>
           <h3 className="font-semibold">{user.email}</h3>
-          <p>{user.name}</p>
+          <p className="text-gray-600">{user.name}</p>
         </div>
       </div>
-      <p className="text-sm text-gray-300 mt-5">
+      <p className="text-xs text-gray-300 mt-5">
         About · Help · Press · API · Jobs · Privacy · Terms · Location · Language
       </p>
-      <p className="text-sm text-gray-300 mt-5">
+      <p className="text-xs text-gray-300 mt-5">
         @Copyright Instagram from METAL
       </p>
     </div>

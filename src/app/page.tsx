@@ -1,14 +1,18 @@
-'use client'
-
 import FollowingBar from '@/components/FollowingBar'
 import PostList from '@/components/PostList'
-import Profile from '@/components/Profile'
-import { useSession } from 'next-auth/react';
-import Image from 'next/image'
+import SideBar from '@/components/SideBar';
+import { getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]/route';
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  const { data: session } = useSession();
+
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   const user = session?.user;
+
+  if (!user) {
+    redirect('/api/auth/signin');
+  }
 
   return (
     <>
@@ -19,7 +23,7 @@ export default function Home() {
             <PostList />
           </div>
           <div>
-            <Profile user={user} />
+            <SideBar user={user} />
           </div>
         </div>
       ) : (

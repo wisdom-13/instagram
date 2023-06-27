@@ -56,7 +56,7 @@ export default function Header() {
             {user &&
               <li>
                 <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={`/user/${user.username}`}>
-                  <Avatar image={user.image} />
+                  <Avatar size='small' image={user.image} />
                   <span className='font-semibold'>프로필</span>
                 </Link>
               </li>
