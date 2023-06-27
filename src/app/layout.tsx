@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import AuthContext from '@/context/AuthContext'
+import SWRConfigContext from '@/context/SWRConfigContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,9 @@ export default function RootLayout({
       <body className='flex'>
         <AuthContext>
           <Navbar />
-          <section className={`${inter.className} flex bg-gray-50 w-full`}>{children}</section>
+          <section className={`${inter.className} flex bg-gray-50 w-full`}>
+            <SWRConfigContext>{children}</SWRConfigContext>
+          </section>
         </AuthContext>
       </body>
     </html>
