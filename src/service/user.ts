@@ -28,7 +28,7 @@ export async function getUserByUsername(username: string) {
       ...,
       "id": _id,
       following[] -> {username, image},
-      foolowers[] -> {username, image},
+      followers[] -> {username, image},
       "bookmarks":bookmarks[]->id
     }`
   )

@@ -11,7 +11,7 @@ export default function SideBar({ user }: Props) {
     <div className="w-[320px]">
       <div className="flex items-center">
         {user.image && <Avatar image={user.image} />}
-        <div>
+        <div className="ml-3">
           <h3 className="font-semibold">{user.email}</h3>
           <p className="text-gray-600">{user.name}</p>
         </div>
