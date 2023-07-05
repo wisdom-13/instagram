@@ -5,7 +5,6 @@ type Props = {
 };
 
 export default function Avatar({ image, size = 'normal', highlight = false }: Props) {
-  console.log(highlight)
   return (
     <div className={getcontainerStyle(size, highlight)}>
       {/* eslint-disable-next-line @next/next/no-img-element*/}
