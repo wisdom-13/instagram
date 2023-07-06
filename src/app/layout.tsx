@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className='flex'>
         <AuthContext>
           <Navbar />
-          <section className={`${inter.className} flex bg-gray-50 w-full`}>
+          <section className={`${inter.className} flex bg-gray-50 w-full ml-[245px]`}>
             <SWRConfigContext>{children}</SWRConfigContext>
           </section>
         </AuthContext>

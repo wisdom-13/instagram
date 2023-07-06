@@ -34,7 +34,7 @@ export default function Header() {
   const user = session?.user;
 
   return (
-    <div className='flex flex-col justify-between w-1/5 max-w-sm h-screen	p-6 border border-r-gray-200'>
+    <div className='flex flex-col justify-between w-[245px] max-w-sm h-screen	p-6 bg-white border border-r-gray-200 fixed'>
       <div>
         <Link href='/'>
           <h1 className='mt-4 mb-9 text-2xl font-bold'>Instantgram</h1>

@@ -1,6 +1,6 @@
 type Props = {
   image?: string | null;
-  size?: 'small' | 'normal';
+  size?: 'small' | 'normal' | 'medium';
   highlight?: boolean;
 };
 
@@ -15,7 +15,7 @@ export default function Avatar({ image, size = 'normal', highlight = false }: Pr
 
 function getcontainerStyle(size: string, highlight: boolean): string {
   const baseStyle = 'rounded-full group-hover:scale-105';
-  const sizeStyle = size === 'small' ? 'w-6 h-6' : 'w-[66px] h-[66px]';
+  const sizeStyle = size === 'small' ? 'w-6 h-6' : (size === 'medium') ? 'w-[32px] h-[32px]' : 'w-[66px] h-[66px]';
   const highlightStyle = highlight ? 'bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300 p-[0.15rem]' : '';
   return `${baseStyle} ${sizeStyle} ${highlightStyle}`;
 }
