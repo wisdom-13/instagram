@@ -1,10 +1,11 @@
-import { client } from "./sanity";
+import { SimplePost } from "@/model/post";
+import { client, urlFor } from "./sanity";
 
 const simplePostProjection = `
   ...,
   "username" : author->username,
   "userImage" : author->image,
-  "image": photo.asset->url,
+  "image" : photo,
   "likes": likes[]->username,
   "text": comments[0].comment,
   "comments": count(comments),
@@ -20,7 +21,7 @@ export async function getFollowingPostsOf(username: string) {
       | order(_createdAt desc)]{${simplePostProjection}}
 
     `
-  )
+  ).then(posts => posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) })))
 }
 
 
