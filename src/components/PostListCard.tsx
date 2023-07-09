@@ -3,13 +3,14 @@ import Avatar from "./Avatar";
 import HeartIcon from "./ui/icons/HeartIcon";
 import BookmarkIcon from "./ui/icons/BookmarkIcon";
 import Image from "next/image";
+import { parseDate } from "@/util/date";
 
 type Props = {
   post: SimplePost
 }
 
 export default function PostListCard({ post }: Props) {
-  const { userImage, username, image, text, likes } = post;
+  const { userImage, username, image, text, likes, createdAt } = post;
   return (
     <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
       <div className="flex items-center p-3">
@@ -29,6 +30,7 @@ export default function PostListCard({ post }: Props) {
         </div>
         <div className="text-sm">
           <p><b className="pr-1">{username}</b>{text}</p>
+          <p className="text-xs text-gray-500 mt-2">{parseDate(createdAt)}</p>
         </div>
       </div>
       <div className="flex border-t border-gray-200 p-3 text-sm">
