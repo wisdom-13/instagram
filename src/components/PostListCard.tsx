@@ -5,10 +5,11 @@ import CommentForm from "./CommentForm";
 import ActionBar from "./ActionBar";
 
 type Props = {
-  post: SimplePost
+  post: SimplePost;
+  priority?: boolean;
 }
 
-export default function PostListCard({ post }: Props) {
+export default function PostListCard({ post, priority = false }: Props) {
   const { userImage, username, image, text, likes, createdAt } = post;
   return (
     <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
@@ -17,7 +18,7 @@ export default function PostListCard({ post }: Props) {
         <h3 className="font-semibold pl-3">{username}</h3>
       </div>
       <div>
-        <Image className="w-full object-cover aspect-square" src={image} width={470} height={470} alt={username} />
+        <Image className="w-full object-cover aspect-square" src={image} width={470} height={470} alt={username} priority={priority} />
       </div>
       <ActionBar likes={likes} username={username} text={text} createdAt={createdAt} />
       <CommentForm />
