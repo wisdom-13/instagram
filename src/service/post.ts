@@ -24,5 +24,20 @@ export async function getFollowingPostsOf(username: string) {
   ).then(posts => posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) })))
 }
 
+export async function getPost(id: string) {
+  return client.fetch(
+    `*[_type == "post" && _id == "${id}"][0]{
+      ...,
+      "username" : author->username,
+      "userImage" : author->image,
+      "image" : photo,
+      "likes": likes[]->username,
+      comments[]{comment, "username": author->username, "image": author->image},
+      "id": _id,
+      "createdAt": _createdAt,
+    }`
+  ).then(post => ({ ...post, image: urlFor(post.image) }));
+}
+
 
 // *[_type == "book" && author._ref in *[_type=="author" && name=="John Doe"]._id ]{...}
