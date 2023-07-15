@@ -19,7 +19,7 @@ export default function FollowingBar() {
 
   return (
     <section>
-      <div className="w-[470px] bg-white p-3 border border-gray-200 rounded-lg text-center min-h-[112px] overflow-x-auto pr-0">
+      <div className="w-[470px] bg-white p-3 border border-gray-200 rounded-lg text-center min-h-[112px] overflow-x-auto pr-0 relative z-0">
         {isLoading ? (
           <PropagateLoader className="mt-[35px]" size={8} color='red' />
         ) : (

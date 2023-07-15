@@ -1,9 +1,10 @@
 import { User } from "./user";
 
-export type Commont = {
+export type Comment = {
   username: string;
   image: string;
   comment: string;
+  createdAt: string;
 }
 
 export type SimplePost = Omit<FullPost, 'comments' & {
