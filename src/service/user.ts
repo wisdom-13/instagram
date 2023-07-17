@@ -33,3 +33,12 @@ export async function getUserByUsername(username: string) {
     }`
   )
 }
+
+export async function getUserList() {
+  return client.fetch(
+    `*[_type == "user"]{
+      ...,
+      "id": _id
+    }`
+  )
+}
