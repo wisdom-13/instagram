@@ -8,7 +8,6 @@ import GridSpinner from "./ui/GridSpinner";
 
 export default function PostList() {
   const { data: posts, isLoading, error } = useSWR<SimplePost[]>('/api/posts');
-
   return (
     <>
       {isLoading &&

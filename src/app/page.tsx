@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <>
       {user ? (
-        <div className='w-full flex pt-6 justify-center'>
+        <div className='w-full h-screen flex pt-6 justify-center'>
           <div>
             <FollowingBar />
             <PostList />

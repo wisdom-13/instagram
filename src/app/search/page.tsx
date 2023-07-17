@@ -1,34 +1,20 @@
 'use client';
 
-import useSWR from "swr";
-import { DetailUser } from "@/model/user";
-import Image from "next/image";
-import Link from "next/link";
-import Avatar from "@/components/Avatar";
+
+import UserList from "@/components/UserList";
 
 export default function SearchPage() {
-  const { data, isLoading, error } = useSWR<DetailUser>('/api/me');
-  const users = data?.following;
 
   return (
-    <div className='w-full flex pt-6 justify-center'>
-      <form>
-        <input placeholder="Search for a email or name" />
-      </form>
-      <div>
-        <div>
-          {users && users.map(({ image, username }) =>
-            <Link href={`/user/${username}`} key={username}>
-              <div className='flex'>
-                <Avatar image={image} size='medium' />
-                <div>
-                  <b>{username}</b>
-                  {username}
-                </div>
-              </div>
-
-            </Link>)}
+    <div className='w-full h-screen flex pt-6 justify-center'>
+      <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
+        <div className="p-5 border-b border-gray-200 ">
+          <h1 className="font-bold text-2xl">검색</h1>
+          <form className="mt-5">
+            <input className="w-full bg-gray-100 p-2 px-4 rounded-md outline-0" placeholder="Search for a email or name" />
+          </form>
         </div>
+        <UserList />
       </div>
     </div>
   );
