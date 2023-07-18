@@ -34,11 +34,13 @@ export async function getUserByUsername(username: string) {
   )
 }
 
-export async function getUserList() {
+export async function searchUsers(keyword: string | null) {
+  const query = keyword ? ` && (username match "*${keyword}*") || (name match "*${keyword}*")` : '';
+
   return client.fetch(
-    `*[_type == "user"]{
+    `*[_type == "user" ${query}]{
       ...,
-      "id": _id
+      "followers": count(followers),
     }`
   )
 }

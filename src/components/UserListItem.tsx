@@ -8,6 +8,7 @@ type Props = {
 
 export default function UserListItem({ user }: Props) {
   const { username, image, name, followers } = user;
+
   return (
     <div className="pb-3">
       <Link href={`/user/${username}`} key={username}>
