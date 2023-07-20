@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
-import { DetailUser } from "@/model/user";
+import { UserSearchResult } from "@/model/user";
 
 type Props = {
-  user: DetailUser
+  user: UserSearchResult
 }
 
 export default function UserListItem({ user }: Props) {
@@ -18,7 +18,7 @@ export default function UserListItem({ user }: Props) {
             <b>{username}</b>
             <span className="text-gray-500">
               {name}
-              {followers && ` • 팔로워 ${followers?.length}명`}
+              {followers && ` • 팔로워 ${followers}명`}
             </span>
           </div>
         </div>
