@@ -3,10 +3,13 @@ import { UserSearchResult } from "@/model/user";
 import UserCard from "./UserCard";
 import { FormEvent, useState } from "react";
 import { PropagateLoader } from "react-spinners";
+import useDebounce from "@/hooks/useDebounce";
 
 export default function UserList() {
-  const [keyword, setKeyword] = useState('bob');
-  const { data: users, isLoading, error } = useSWR<UserSearchResult[]>(`/api/search/${keyword}`);
+  const [keyword, setKeyword] = useState('');
+  const debouncedSearch = useDebounce(keyword, 1000);
+
+  const { data: users, isLoading, error } = useSWR<UserSearchResult[]>(`/api/search/${debouncedSearch}`);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
