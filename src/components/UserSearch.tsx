@@ -16,7 +16,7 @@ export default function UserList() {
   }
 
   return (
-    <div>
+    <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
       <div className="p-5 border-b border-gray-200 ">
         <h1 className="font-bold text-2xl">검색</h1>
         <form className="mt-5" onSubmit={onSubmit}>

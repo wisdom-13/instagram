@@ -1,3 +1,4 @@
+import UserProfile from '@/components/UserProfile';
 import React from 'react';
 
 type Props = {
@@ -8,8 +9,8 @@ type Props = {
 
 export default function UserPage({ params: { slug } }: Props) {
   return (
-    <div>
-      {slug}
+    <div className='w-full h-screen flex justify-center bg-white'>
+      <UserProfile username={slug} />
     </div>
   );
 }

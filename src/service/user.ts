@@ -44,3 +44,9 @@ export async function searchUsers(keyword: string | null) {
     }`
   )
 }
+
+// export async function getUser(username: string) {
+//   return client.fetch(
+//     `[_type == "user" && username = "${username}"][0]`
+//   )
+// }
