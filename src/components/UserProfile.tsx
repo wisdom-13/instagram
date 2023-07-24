@@ -16,7 +16,7 @@ export default function UserProfile({ username }: Props) {
   }
 
   return (
-    <div className='flex items-center w-full max-w-[935px]'>
+    <div className='flex items-center w-full max-w-[935px] my-8'>
       <div className='grow flex justify-center'>
         <Avatar image={profile.image} size='large' />
       </div>

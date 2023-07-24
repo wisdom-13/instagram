@@ -1,3 +1,4 @@
+import ProfileMenu from '@/components/ProfileMenu';
 import UserProfile from '@/components/UserProfile';
 import React from 'react';
 
@@ -9,8 +10,9 @@ type Props = {
 
 export default function UserPage({ params: { slug } }: Props) {
   return (
-    <div className='w-full h-screen flex justify-center bg-white'>
+    <div className='w-full h-screen flex flex-col items-center bg-white'>
       <UserProfile username={slug} />
+      <ProfileMenu />
     </div>
   );
 }
