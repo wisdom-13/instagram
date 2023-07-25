@@ -47,7 +47,7 @@ export async function searchUsers(keyword: string | null) {
 
 export async function getUserProfile(username: string) {
   return client.fetch(
-    `*[_type == "user" && username = "${username}"][0]{
+    `*[_type == "user" && username == "${username}"][0]{
       ...,
       "id": _id,
       "followers": count(followers),
