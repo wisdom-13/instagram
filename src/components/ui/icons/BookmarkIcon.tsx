@@ -1,7 +1,10 @@
 import { BiBookmark } from 'react-icons/bi';
 
-export default function BookmarkIcon() {
-  return <BiBookmark className='' size='24' />;
+type Props = {
+  className?: string | '';
+}
+export default function BookmarkIcon({ className = '' }: Props) {
+  return <BiBookmark className={className} size='24' />;
 }
 
 
