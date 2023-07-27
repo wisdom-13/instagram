@@ -1,7 +1,7 @@
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { NextResponse } from "next/server";
 import { searchUsers } from "@/service/user";
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   return searchUsers(null)
