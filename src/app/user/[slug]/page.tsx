@@ -1,8 +1,8 @@
 import UserProfile from '@/components/UserProfile';
 import React from 'react';
 import notFound from './not-found';
-import { getUserProfile } from '@/service/user';
 import UserPosts from '@/components/UserPosts';
+import { getUserProfile } from '@/service/user';
 
 type Props = {
   params: {
