@@ -1,3 +1,5 @@
+'use client'
+
 import useSWR from "swr";
 import { UserSearchResult } from "@/model/user";
 import UserCard from "./UserCard";
