@@ -1,6 +1,8 @@
-import ProfileMenu from '@/components/ProfileMenu';
 import UserProfile from '@/components/UserProfile';
 import React from 'react';
+import notFound from './not-found';
+import { getUserProfile } from '@/service/user';
+import UserPosts from '@/components/UserPosts';
 
 type Props = {
   params: {
@@ -8,11 +10,18 @@ type Props = {
   }
 }
 
-export default function UserPage({ params: { slug } }: Props) {
+
+export default async function UserPage({ params: { slug } }: Props) {
+  const user = await getUserProfile(slug);
+
+  if (!user) {
+    notFound();
+  }
+
   return (
     <div className='w-full h-screen flex flex-col items-center bg-white'>
-      <UserProfile username={slug} />
-      <ProfileMenu />
+      <UserProfile user={user} />
+      <UserPosts user={user} />
     </div>
   );
 }

@@ -1,30 +1,36 @@
 import Avatar from './Avatar';
-import { getUserProfile } from '@/service/user';
+import { ProfileUser } from '@/model/user';
+import FollowButton from './FollowButton';
 
 type Props = {
-  username: string;
+  user: ProfileUser;
 }
 
-export default async function UserProfile({ username }: Props) {
-  const profile = await getUserProfile(username);
+export default function UserProfile({ user }: Props) {
+  const { image, username, posts, followers, following, name } = user;
 
-  if (!profile) {
-    return '';
-  }
+  const info = [
+    { title: '게시물', data: posts },
+    { title: '팔로워', data: followers },
+    { title: '팔로우', data: following },
+  ]
 
   return (
     <div className='flex items-center w-full max-w-[935px] my-8'>
       <div className='grow flex justify-center'>
-        <Avatar image={profile.image} size='large' />
+        <Avatar image={image} size='large' />
       </div>
       <div className='grow-[2]'>
-        <h1 className='text-xl mb-4'>{profile.username}</h1>
+        <div className='flex items-center mb-4'>
+          <h1 className='text-xl'>{username}</h1>
+          <FollowButton user={user} />
+        </div>
         <ul className='flex mb-4'>
-          <li className='mr-10'>게시물 <b>{profile.posts}</b></li>
-          <li className='mr-10'>팔로워 <b>{profile.followers}</b></li>
-          <li>팔로우 <b>{profile.following}</b></li>
+          {info.map(({ title, data }, index) => (
+            <li key={index} className='mr-10'>{title} <b>{data}</b></li>
+          ))}
         </ul>
-        <div className='font-semibold'>{profile.name}</div>
+        <div className='font-semibold'>{name}</div>
       </div>
     </div>
   );
