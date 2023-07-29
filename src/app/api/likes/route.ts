@@ -1,8 +1,7 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { dislikePost, likePost } from "@/service/post";
-import { error } from "console";
+import { disLikePost, likePost } from "@/service/post";
 
 export async function PUT(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -18,7 +17,7 @@ export async function PUT(req: NextRequest) {
     return new Response('Bad Request', { status: 400 });
   }
 
-  const request = like ? likePost : dislikePost;
+  const request = like ? likePost : disLikePost;
 
   return request(id, user.id)
     .then(res => NextResponse.json(res))
