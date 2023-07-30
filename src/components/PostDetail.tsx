@@ -3,7 +3,7 @@ import Image from "next/image";
 import PostUserAvatar from "./ui/PostUserAvatar";
 import Avatar from "./Avatar";
 import ActionBar from "./ActionBar";
-import useFullPost from "@/hooks/useFullPost";
+import useFullPost from "@/hooks/usePost";
 
 type Props = {
   post: SimplePost,
@@ -22,7 +22,7 @@ export default function PostDetail({ post }: Props) {
       <div className="bg-white basis-1/2 flex flex-col text-sm">
         <PostUserAvatar image={userImage} username={username} />
         <ul className="border-t border-gray-200 h-full overflow-y-auto">
-          {comments && comments.map(({ image, username: commentUsername, comment, createdAt }, index) => <li key={index}>
+          {comments && comments.map(({ image, username: commentUsername, comment }, index) => <li key={index}>
             <div className="flex items-center p-3">
               <Avatar image={image} size='medium' />
               <span className="font-semibold pl-3 pr-2">{commentUsername}</span>
