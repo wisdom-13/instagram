@@ -80,3 +80,21 @@ export async function removeBookmark(userId: string, postId: string) {
     .unset([`bookmarks[_ref=="${postId}"]`])
     .commit()
 }
+
+export async function followUser(userId: string, followUserId: string) {
+  return client.patch(userId)
+    .setIfMissing({ following: [] })
+    .append('following', [
+      {
+        _ref: followUserId,
+        _type: 'reference'
+      }
+    ])
+    .commit({ autoGenerateArrayKeys: true })
+}
+
+export async function unFollowUser(userId: string, followUserId: string) {
+  return client.patch(userId)
+    .unset([`following[_ref=="${followUserId}"]`])
+    .commit()
+}

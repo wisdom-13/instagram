@@ -9,12 +9,7 @@ import useMe from "@/hooks/useMe";
 export default function FollowingBar() {
   const { user, isLoading, error } = useMe();
   // const users = data?.following;
-  const users = user?.following && [
-    ...user?.followers,
-    ...user?.followers,
-    ...user?.followers,
-    ...user?.followers,
-  ];
+  const users = user?.following;
 
   return (
     <section>

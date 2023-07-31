@@ -9,6 +9,13 @@ async function updateBookmark(postId: string, bookmark: boolean) {
   }).then((res) => res.json());
 }
 
+async function updateUser(followUserId: string, follow: boolean) {
+  return fetch('/api/follow', {
+    method: 'PUT',
+    body: JSON.stringify({ followUserId, follow }),
+  }).then((res) => res.json());
+}
+
 export default function useMe() {
   const { data: user, isLoading, error, mutate } = useSWR<HomeUser>('/api/me');
 
@@ -33,5 +40,22 @@ export default function useMe() {
     }, [user, mutate]
   )
 
-  return { user, isLoading, error, setBookmark }
+  const followUser = (followUserId: string, follow: boolean, username: string, image?: string) => {
+    if (!user) return;
+
+    const newUser = {
+      ...user,
+      following: follow ? [...user.following, { username, image }] : user.following.filter(item => item.username !== username)
+    }
+
+    return mutate(updateUser(followUserId, follow), {
+      optimisticData: newUser,
+      populateCache: false,
+      revalidate: false,
+      rollbackOnError: true,
+    })
+
+  }
+
+  return { user, isLoading, error, setBookmark, followUser }
 }
