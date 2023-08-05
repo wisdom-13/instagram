@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { followUser, unFollowUser } from "@/service/user";
+import { follow, unFollow } from "@/service/user";
 
 export async function PUT(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -11,13 +11,13 @@ export async function PUT(req: NextRequest) {
     return new Response('Authentication Error', { status: 401 });
   }
 
-  const { followUserId, follow } = await req.json();
+  const { followUserId, follow: isFollow } = await req.json();
 
-  if (!followUserId || follow === undefined) {
-    return new Response(`Bad Request ${followUserId} + ${follow}`, { status: 400 });
+  if (!followUserId || isFollow === undefined) {
+    return new Response(`Bad Request ${followUserId} + ${isFollow}`, { status: 400 });
   }
 
-  const request = follow ? followUser : unFollowUser;
+  const request = isFollow ? follow : unFollow;
 
   return request(user.id, followUserId)
     .then(res => NextResponse.json(res))
