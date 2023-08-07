@@ -1,11 +1,10 @@
-import React from 'react';
-import { HiOutlinePhoto } from 'react-icons/hi2'
+import { HiOutlinePhoto } from 'react-icons/hi2';
 
-export default function MediaIcon() {
-  return (
-    <div>
-      <HiOutlinePhoto size={128} />
-    </div>
-  );
+type Props = {
+  className?: string | '';
 }
+export default function MediaIcon({ className = '' }: Props) {
+  return <HiOutlinePhoto className={className} size='128' />;
+}
+
 
