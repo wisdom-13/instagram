@@ -2,7 +2,7 @@ import React from 'react';
 import Avatar from '../Avatar';
 
 type Props = {
-  image: string;
+  image?: string;
   username: string;
 }
 
