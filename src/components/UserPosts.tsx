@@ -6,6 +6,7 @@ import HeartIcon from "./ui/icons/HeartIcon";
 import PostGridIcon from "./ui/icons/PostGridIcon";
 import { ProfileUser } from "@/model/user";
 import PostGrid from "./PostGrid";
+import { CacheKeyContext } from "@/context/CacheKeysContext";
 
 const tabs = [
   { 'type': 'posts', 'title': '게시물', 'icon': <PostGridIcon className="w-3" /> },
@@ -35,7 +36,10 @@ export default function UserPosts({ user: { username } }: Props) {
         ))}
       </ul>
 
-      <PostGrid username={username} query={query} />
+      <CacheKeyContext.Provider value={{ postsKey: `/api/user/${username}/${query}` }}>
+        <PostGrid />
+      </CacheKeyContext.Provider>
+
     </div>
   );
 }
