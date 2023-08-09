@@ -30,7 +30,6 @@ export default function NewPost({ user }: Props) {
   }
 
   const handleDrag = (e: DragEvent) => {
-    console.log('drag')
     if (e.type === 'dragenter') {
       setDragging(true);
 
@@ -55,22 +54,24 @@ export default function NewPost({ user }: Props) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!file) return;
+
     setLoading(true);
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('text', textRef.current?.value ?? '')
+    formData.append('text', textRef.current?.value ?? '');
 
-    fetch('/api/posts/', { method: 'POST', body: formData })
-      .then(res => {
+    fetch('/api/posts/', { method: 'POST', body: formData }) //
+      .then((res) => {
         if (!res.ok) {
           setError(`${res.status} ${res.statusText}`);
           return;
         }
-        router.push('/')
+        router.push('/');
       })
-      .catch(err => setError(err.toString()))
-      .finally(() => setLoading(false))
-  }
+      .catch((err) => setError(err.toString()))
+      .finally(() => setLoading(false));
+  };
+
 
   return (
     <div className='w-[1000px] h-[calc(100%-5rem)]'>
@@ -98,11 +99,11 @@ export default function NewPost({ user }: Props) {
         <div className='flex h-[calc(100%-48px)]'>
           <div className='w-3/5 h-full flex flex-col items-center justify-center text-center'>
             <input
-              type='file'
-              id='input-upload'
-              name='input'
-              accept='image/*'
               className='hidden'
+              name='input'
+              id='input-upload'
+              type='file'
+              accept='image/*'
               onChange={handleChange}
             />
             <label
