@@ -33,6 +33,5 @@ export async function POST(req: NextRequest) {
   }
 
   return createPost(user.id, text, file)
-    .then((data) => console.log(data));
-  // .then((data) => NextResponse.json(data));
+    .then((data) => NextResponse.json(data));
 }
