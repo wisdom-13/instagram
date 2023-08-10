@@ -1,10 +1,14 @@
-'use client'
+'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
-import { useSession, signIn, signOut } from "next-auth/react"
-
-import { HomeIcon, HomeFillIcon, SearchIcon, SearchFillIcon, NewIcon, NewFillIcon } from './ui/icons'
+import HomeFillIcon from './ui/icons/HomeFillIcon';
+import HomeIcon from './ui/icons/HomeIcon';
+import NewFillIcon from './ui/icons/NewFillIcon';
+import NewIcon from './ui/icons/NewIcon';
+import SearchFillIcon from './ui/icons/SearchFillIcon';
+import SearchIcon from './ui/icons/SearchIcon';
+import { usePathname } from 'next/navigation';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import Avatar from './Avatar';
 
 const menu = [
@@ -28,8 +32,8 @@ const menu = [
   },
 ]
 
-export default function Header() {
-  const pathname = usePathname();
+export default function Navbar() {
+  const pathName = usePathname();
   const { data: session } = useSession();
   const user = session?.user;
 
@@ -45,7 +49,7 @@ export default function Header() {
               menu.map(item =>
                 <li key={item.href}>
                   <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={item.href}>
-                    {pathname == item.href
+                    {pathName == item.href
                       ? item.clickedIcon
                       : item.icon
                     }
@@ -79,4 +83,3 @@ export default function Header() {
     </div>
   );
 }
-

@@ -1,14 +1,11 @@
-import Link from "next/link";
-import Avatar from "@/components/Avatar";
-import { UserSearchResult } from "@/model/user";
+import { SearchUser } from '@/model/user';
+import Link from 'next/link';
+import Avatar from './Avatar';
 
 type Props = {
-  user: UserSearchResult
-}
-
-export default function UserListItem({ user }: Props) {
-  const { username, image, name, followers } = user;
-
+  user: SearchUser;
+};
+export default function UserCard({ user: { name, username, image, followers } }: Props) {
   return (
     <div className="pb-3">
       <Link href={`/user/${username}`} key={username}>
@@ -26,4 +23,3 @@ export default function UserListItem({ user }: Props) {
     </div>
   );
 }
-

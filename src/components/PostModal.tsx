@@ -1,10 +1,9 @@
-import CloseIcon from "./ui/icons/CloseIcon";
+import CloseIcon from './ui/icons/CloseIcon';
 
 type Props = {
   children: React.ReactNode;
   onClose: () => void;
-}
-
+};
 export default function PostModal({ onClose, children }: Props) {
   return (
     <section
@@ -21,4 +20,3 @@ export default function PostModal({ onClose, children }: Props) {
     </section>
   );
 }
-

@@ -6,22 +6,22 @@ export default {
     {
       title: 'Username',
       name: 'username',
-      type: 'string'
+      type: 'string',
     },
     {
       title: 'Name',
       name: 'name',
-      type: 'string'
+      type: 'string',
     },
     {
       title: 'Email',
       name: 'email',
-      type: 'string'
+      type: 'string',
     },
     {
       title: 'Image',
       name: 'image',
-      type: 'string'
+      type: 'string',
     },
     {
       title: 'Following',
@@ -30,10 +30,10 @@ export default {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'user' }]
-        }
+          to: [{type: 'user'}],
+        },
       ],
-      validation: (Rule) => Rule.unique()
+      validation: (Rule) => Rule.unique(),
     },
     {
       title: 'Followers',
@@ -42,10 +42,10 @@ export default {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'user' }]
-        }
+          to: [{type: 'user'}],
+        },
       ],
-      validation: (Rule) => Rule.unique()
+      validation: (Rule) => Rule.unique(),
     },
     {
       title: 'Bookmarks',
@@ -54,16 +54,16 @@ export default {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'post' }]
-        }
+          to: [{type: 'post'}],
+        },
       ],
-      validation: (Rule) => Rule.unique()
-    }
+      validation: (Rule) => Rule.unique(),
+    },
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'username'
-    }
-  }
+      subtitle: 'username',
+    },
+  },
 }

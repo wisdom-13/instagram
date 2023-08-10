@@ -7,7 +7,7 @@ export default {
       title: 'Author',
       name: 'author',
       type: 'reference',
-      to: [{ type: 'user' }],
+      to: [{type: 'user'}],
     },
     {
       title: 'Photo',
@@ -21,10 +21,10 @@ export default {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'user' }]
-        }
+          to: [{type: 'user'}],
+        },
       ],
-      validation: (Rule) => Rule.unique()
+      validation: (Rule) => Rule.unique(),
     },
     {
       title: 'Comments',
@@ -32,7 +32,7 @@ export default {
       type: 'array',
       of: [
         {
-          title: 'Commont',
+          title: 'Comment',
           name: 'comment',
           type: 'document',
           fields: [
@@ -40,32 +40,32 @@ export default {
               title: 'Author',
               name: 'author',
               type: 'reference',
-              to: [{ type: 'user' }]
+              to: [{type: 'user'}],
             },
             {
               title: 'Comment',
               name: 'comment',
               type: 'string',
-            }
-          ]
-        }
-      ]
-    }
+            },
+          ],
+        },
+      ],
+    },
   ],
   preview: {
     select: {
       title: 'comments.0.comment',
       authorName: 'author.name',
-      authorEmail: 'author.email',
-      media: 'photo'
+      authorUsername: 'author.username',
+      media: 'photo',
     },
     prepare(selection) {
-      const { title, authorName, authorEmail, media } = selection;
+      const {title, authorName, authorUsername, media} = selection
       return {
         title,
-        subtitle: `by ${authorName} (${authorEmail})`,
+        subtitle: `by ${authorName} (${authorUsername})`,
         media,
       }
-    }
-  }
+    },
+  },
 }

@@ -1,13 +1,12 @@
-import Avatar from './Avatar';
 import { ProfileUser } from '@/model/user';
+import Avatar from './Avatar';
 import FollowButton from './FollowButton';
 
 type Props = {
   user: ProfileUser;
-}
-
+};
 export default function UserProfile({ user }: Props) {
-  const { image, username, posts, followers, following, name } = user;
+  const { image, username, name, followers, following, posts } = user;
 
   const info = [
     { title: '게시물', data: posts },
@@ -35,4 +34,3 @@ export default function UserProfile({ user }: Props) {
     </div>
   );
 }
-

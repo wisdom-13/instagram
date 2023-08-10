@@ -1,26 +1,22 @@
-'use client'
+'use client';
+import { CacheKeysContext } from '@/context/CacheKeysContext';
+import { ProfileUser } from '@/model/user';
+import { useState } from 'react';
+import PostGrid from './PostGrid';
+import BookmarkIcon from './ui/icons/BookmarkIcon';
+import HeartIcon from './ui/icons/HeartIcon';
+import PostGridIcon from './ui/icons/PostGridIcon';
 
-import { useState } from "react";
-import BookmarkIcon from "./ui/icons/BookmarkIcon";
-import HeartIcon from "./ui/icons/HeartIcon";
-import PostGridIcon from "./ui/icons/PostGridIcon";
-import { ProfileUser } from "@/model/user";
-import PostGrid from "./PostGrid";
-import { CacheKeyContext } from "@/context/CacheKeysContext";
-
+type Props = {
+  user: ProfileUser;
+};
 const tabs = [
   { 'type': 'posts', 'title': '게시물', 'icon': <PostGridIcon className="w-3" /> },
   { 'type': 'saved', 'title': '저장됨', 'icon': <BookmarkIcon className="w-3" /> },
   { 'type': 'liked', 'title': '좋아함', 'icon': <HeartIcon className="w-3" /> },
-]
-
-type Props = {
-  user: ProfileUser;
-}
-
+];
 export default function UserPosts({ user: { username } }: Props) {
   const [query, setQuery] = useState(tabs[0].type);
-
 
   return (
     <div className="flex flex-col items-center w-full max-w-[935px] border-t border-gray-300">
@@ -35,12 +31,10 @@ export default function UserPosts({ user: { username } }: Props) {
           </li>
         ))}
       </ul>
-
-      <CacheKeyContext.Provider value={{ postsKey: `/api/user/${username}/${query}` }}>
+      <CacheKeysContext.Provider value={{ postsKey: `/api/users/${username}/${query}` }}>
         <PostGrid />
-      </CacheKeyContext.Provider>
+      </CacheKeysContext.Provider>
 
     </div>
   );
 }
-

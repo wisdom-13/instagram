@@ -1,15 +1,14 @@
 'use client';
-
-import PostListCard from "./PostListCard";
-import GridSpinner from "./ui/GridSpinner";
-import usePosts from "@/hooks/usePosts";
-
+import usePosts from '@/hooks/posts';
+import PostListCard from './PostListCard';
+import GridSpinner from './ui/GridSpinner';
 
 export default function PostList() {
-  const { posts, isLoading, error } = usePosts();
+  const { posts, isLoading: loading } = usePosts();
+
   return (
     <>
-      {isLoading &&
+      {loading &&
         <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3 py-10 text-center">
           <GridSpinner color='red' />
         </div>
@@ -23,5 +22,3 @@ export default function PostList() {
 
   );
 }
-
-

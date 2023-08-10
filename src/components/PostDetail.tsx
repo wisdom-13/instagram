@@ -1,14 +1,13 @@
-import { SimplePost } from "@/model/post";
-import Image from "next/image";
-import PostUserAvatar from "./ui/PostUserAvatar";
-import Avatar from "./Avatar";
-import ActionBar from "./ActionBar";
-import useFullPost from "@/hooks/usePost";
+import useFullPost from '@/hooks/post';
+import { SimplePost } from '@/model/post';
+import Image from 'next/image';
+import ActionBar from './ActionBar';
+import Avatar from './Avatar';
+import PostUserAvatar from './PostUserAvatar';
 
 type Props = {
-  post: SimplePost,
-}
-
+  post: SimplePost;
+};
 export default function PostDetail({ post }: Props) {
   const { id, userImage, username, image } = post;
   const { post: data, postComment } = useFullPost(id);
@@ -38,5 +37,3 @@ export default function PostDetail({ post }: Props) {
     </section>
   );
 }
-
-

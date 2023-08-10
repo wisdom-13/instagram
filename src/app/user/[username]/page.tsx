@@ -1,17 +1,13 @@
-import UserProfile from '@/components/UserProfile';
-import React, { cache } from 'react';
-import notFound from './not-found';
 import UserPosts from '@/components/UserPosts';
-import { getUserProfile } from '@/service/user';
-import { Metadata } from "next";
+import UserProfile from '@/components/UserProfile';
+import { getUserForProfile } from '@/service/user';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { cache } from 'react';
 
-type Props = {
-  params: {
-    username: string;
-  }
-}
+type Props = { params: { username: string } };
 
-const getUser = cache(async (username: string) => getUserProfile(username));
+const getUser = cache(async (username: string) => getUserForProfile(username));
 
 export default async function UserPage({ params: { username } }: Props) {
   const user = await getUser(username);
@@ -28,10 +24,12 @@ export default async function UserPage({ params: { username } }: Props) {
   );
 }
 
-export async function generateMetadata({ params: { username } }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params: { username },
+}: Props): Promise<Metadata> {
   const user = await getUser(username);
   return {
-    title: `${user?.name} (@${user?.username})`,
-    description: `${user?.name}의 Instagram 사진`
-  }
+    title: `${user?.name} (@${user?.username}) · Instantgram Photos`,
+    description: `${user?.name}'s all Instantgram posts`,
+  };
 }

@@ -1,11 +1,9 @@
-import React from 'react';
-import Avatar from '../Avatar';
+import Avatar from './Avatar';
 
 type Props = {
-  image?: string;
+  image: string;
   username: string;
-}
-
+};
 export default function PostUserAvatar({ image, username }: Props) {
   return (
     <div className="flex items-center p-3">
@@ -14,4 +12,3 @@ export default function PostUserAvatar({ image, username }: Props) {
     </div>
   );
 }
-

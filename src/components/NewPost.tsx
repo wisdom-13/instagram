@@ -1,19 +1,17 @@
-'use client'
-
-import React, { ChangeEvent, DragEvent, FormEvent, useRef, useState } from 'react';
-import Button from './ui/Button';
-import MediaIcon from './ui/icons/MediaIcon';
-import PostUserAvatar from './ui/PostUserAvatar';
-import { User } from "@/model/user";
+'use client';
+import { AuthUser } from '@/model/user';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { ChangeEvent, DragEvent, FormEvent, useRef, useState } from 'react';
+import PostUserAvatar from './PostUserAvatar';
+import Button from './ui/Button';
 import GridSpinner from './ui/GridSpinner';
+import MediaIcon from './ui/icons/MediaIcon';
 
 type Props = {
-  user: User;
-}
-
-export default function NewPost({ user }: Props) {
+  user: AuthUser;
+};
+export default function NewPost({ user: { username, image } }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState(false);
@@ -27,29 +25,25 @@ export default function NewPost({ user }: Props) {
     if (files && files[0]) {
       setFile(files[0]);
     }
-  }
-
+  };
   const handleDrag = (e: DragEvent) => {
     if (e.type === 'dragenter') {
       setDragging(true);
-
     } else if (e.type === 'dragleave') {
       setDragging(false);
     }
-  }
-
+  };
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
-  }
-
-  const handleDrap = (e: DragEvent) => {
+  };
+  const handleDrop = (e: DragEvent) => {
     e.preventDefault();
     setDragging(false);
     const files = e.dataTransfer?.files;
     if (files && files[0]) {
       setFile(files[0]);
     }
-  }
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -71,7 +65,6 @@ export default function NewPost({ user }: Props) {
       .catch((err) => setError(err.toString()))
       .finally(() => setLoading(false));
   };
-
 
   return (
     <div className='w-[1000px] h-[calc(100%-5rem)]'>
@@ -112,7 +105,7 @@ export default function NewPost({ user }: Props) {
               onDragEnter={handleDrag}
               onDragLeave={handleDrag}
               onDragOver={handleDragOver}
-              onDrop={handleDrap}
+              onDrop={handleDrop}
             >
               {!file && (
                 <>
@@ -134,7 +127,7 @@ export default function NewPost({ user }: Props) {
             </label>
           </div>
           <div className='w-2/5 border-l border-gray-200'>
-            <PostUserAvatar username={user.username} image={user.image} />
+            <PostUserAvatar username={username} image={image || ''} />
             <div className='px-3 border-b border-gray-200'>
               <textarea
                 name='text'
@@ -152,4 +145,3 @@ export default function NewPost({ user }: Props) {
     </div>
   );
 }
-

@@ -1,29 +1,27 @@
-'use client'
+'use client';
 
-import { Comment, SimplePost } from "@/model/post";
-import Image from "next/image";
-import ActionBar from "./ActionBar";
-import { useState } from "react";
-import ModalPortal from "./ui/ModalPortal";
-import PostModal from "./PostModal";
-import PostDetail from "./PostDetail";
-import PostUserAvatar from "./ui/PostUserAvatar";
-import usePosts from "@/hooks/usePosts";
+import usePosts from '@/hooks/posts';
+import { Comment, SimplePost } from '@/model/post';
+import Image from 'next/image';
+import { useState } from 'react';
+import ActionBar from './ActionBar';
+import PostDetail from './PostDetail';
+import PostModal from './PostModal';
+import PostUserAvatar from './PostUserAvatar';
+import ModalPortal from './ui/ModalPortal';
 
 type Props = {
   post: SimplePost;
   priority?: boolean;
-}
+};
 
 export default function PostListCard({ post, priority = false }: Props) {
-  const { userImage, username, image, text, comments } = post;
+  const { userImage, username, image, comments, text } = post;
   const [openModal, setOpenModal] = useState(false);
-
   const { postComment } = usePosts();
-
   const handlePostComment = (comment: Comment) => {
     postComment(post, comment);
-  }
+  };
 
   return (
     <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
@@ -56,4 +54,3 @@ export default function PostListCard({ post, priority = false }: Props) {
     </div>
   );
 }
-

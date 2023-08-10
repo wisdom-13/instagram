@@ -1,22 +1,24 @@
-'use client'
+'use client';
 
-import useSWR from "swr";
-import { UserSearchResult } from "@/model/user";
-import UserCard from "./UserCard";
-import { FormEvent, useState } from "react";
-import { PropagateLoader } from "react-spinners";
-import useDebounce from "@/hooks/useDebounce";
+import useDebounce from '@/hooks/debounce';
+import { SearchUser } from '@/model/user';
+import { FormEvent, useState } from 'react';
+import useSWR from 'swr';
+import UserCard from './UserCard';
+import { PropagateLoader } from 'react-spinners';
 
-export default function UserList() {
+export default function UserSearch() {
   const [keyword, setKeyword] = useState('');
-  const debouncedSearch = useDebounce(keyword, 1000);
-
-  const { data: users, isLoading, error } = useSWR<UserSearchResult[]>(`/api/search/${debouncedSearch}`);
+  const debouncedKeyword = useDebounce(keyword);
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-  }
-
+  };
   return (
     <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
       <div className="p-5 border-b border-gray-200 ">
@@ -41,4 +43,3 @@ export default function UserList() {
     </div>
   );
 }
-

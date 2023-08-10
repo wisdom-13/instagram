@@ -1,7 +1,7 @@
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
-import { follow, unFollow } from "@/service/user";
+import { follow, unfollow } from '@/service/user';
+import { getServerSession } from 'next-auth';
+import { NextRequest, NextResponse } from 'next/server';
+import { authOptions } from '../auth/[...nextauth]/route';
 
 export async function PUT(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -11,15 +11,15 @@ export async function PUT(req: NextRequest) {
     return new Response('Authentication Error', { status: 401 });
   }
 
-  const { followUserId, follow: isFollow } = await req.json();
+  const { id: targetId, follow: isFollow } = await req.json();
 
-  if (!followUserId || isFollow === undefined) {
-    return new Response(`Bad Request ${followUserId} + ${isFollow}`, { status: 400 });
+  if (!targetId || isFollow === undefined) {
+    return new Response('Bad Request', { status: 400 });
   }
 
-  const request = isFollow ? follow : unFollow;
+  const request = isFollow ? follow : unfollow;
 
-  return request(user.id, followUserId)
-    .then(res => NextResponse.json(res))
-    .catch(error => new Response(JSON.stringify(error), { status: 500 }))
+  return request(user.id, targetId) //
+    .then((res) => NextResponse.json(res))
+    .catch((error) => new Response(JSON.stringify(error), { status: 500 }));
 }

@@ -1,7 +1,7 @@
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
-import { createPost, getFollowingPostsOf } from "@/service/posts";
+import { createPost, getFollowingPostsOf } from '@/service/posts';
+import { getServerSession } from 'next-auth';
+import { NextResponse, NextRequest } from 'next/server';
+import { authOptions } from '../auth/[...nextauth]/route';
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -11,9 +11,8 @@ export async function GET() {
     return new Response('Authentication Error', { status: 401 });
   }
 
-  return getFollowingPostsOf(user.username)
-    .then((data) => NextResponse.json(data)
-    );
+  return getFollowingPostsOf(user.username) //
+    .then((data) => NextResponse.json(data));
 }
 
 export async function POST(req: NextRequest) {
@@ -32,6 +31,6 @@ export async function POST(req: NextRequest) {
     return new Response('Bad Request', { status: 400 });
   }
 
-  return createPost(user.id, text, file)
+  return createPost(user.id, text, file) //
     .then((data) => NextResponse.json(data));
 }

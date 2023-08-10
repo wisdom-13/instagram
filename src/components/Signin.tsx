@@ -1,13 +1,11 @@
-'use client'
-import { ClientSafeProvider, signIn } from "next-auth/react";
-// import { GoogleIcon } from './ui/icons/GoogleIcon'
+'use client';
 
+import { ClientSafeProvider, signIn } from 'next-auth/react';
 
 type Props = {
   providers: Record<string, ClientSafeProvider>;
   callbackUrl: string;
-}
-
+};
 export default function Signin({ providers, callbackUrl }: Props) {
   return (
     <>
@@ -30,4 +28,3 @@ export default function Signin({ providers, callbackUrl }: Props) {
     </>
   );
 }
-

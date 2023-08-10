@@ -1,18 +1,16 @@
-'use client'
-
-import { ProfileUser } from "@/model/user";
-import Button from "./ui/Button";
-import useMe from "@/hooks/useMe";
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { PulseLoader } from "react-spinners";
+'use client';
+import useMe from '@/hooks/me';
+import { ProfileUser } from '@/model/user';
+import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
+import { PulseLoader } from 'react-spinners';
+import Button from './ui/Button';
 
 type Props = {
   user: ProfileUser;
-}
-
+};
 export default function FollowButton({ user }: Props) {
-  const { id, username } = user;
+  const { username } = user;
   const { user: loggedInUser, toggleFollow } = useMe();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -20,17 +18,20 @@ export default function FollowButton({ user }: Props) {
   const isUpdating = isPending || isFetching;
 
   const showButton = loggedInUser && loggedInUser.username !== username;
-  const following = loggedInUser && loggedInUser.following.find((item) => item.username === username);
-  const text = following ? '팔로우 취소' : '팔로우';
+  const following =
+    loggedInUser &&
+    loggedInUser.following.find((item) => item.username === username);
+
+  const text = following ? 'Unfollow' : 'Follow';
 
   const handleFollow = async () => {
     setIsFetching(true);
-    await toggleFollow(id, !following);
+    await toggleFollow(user.id, !following);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -47,4 +48,3 @@ export default function FollowButton({ user }: Props) {
     </>
   );
 }
-

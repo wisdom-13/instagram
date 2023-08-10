@@ -1,18 +1,19 @@
-import { FormEvent, useState } from "react";
-import SmileIcon from "./ui/icons/SmileIcon";
+import { FormEvent, useState } from 'react';
+import SmileIcon from './ui/icons/SmileIcon';
 
 type Props = {
-  onPostComment: (comment: string) => void
-}
+  onPostComment: (comment: string) => void;
+};
 
 export default function CommentForm({ onPostComment }: Props) {
   const [comment, setComment] = useState('');
   const buttonDisabled = comment.length === 0;
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onPostComment(comment);
     setComment('');
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex border-t border-gray-200 p-3 text-sm">
@@ -29,4 +30,3 @@ export default function CommentForm({ onPostComment }: Props) {
     </form>
   );
 }
-
