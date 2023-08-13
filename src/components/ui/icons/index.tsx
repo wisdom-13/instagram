@@ -1,3 +1,4 @@
+export { default as InstagramIcon } from './InstagramIcon'
 export { default as HomeIcon } from './HomeIcon'
 export { default as HomeFillIcon } from './HomeFillIcon'
 export { default as SearchIcon } from './SearchIcon'

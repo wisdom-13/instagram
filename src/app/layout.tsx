@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className='flex'>
         <AuthContext>
           <Navbar />
-          <section className={`${openSans.className} flex bg-gray-50 w-full h-fit min-h-screen ml-[245px]`}>
+          <section className={`${openSans.className} flex bg-gray-50 w-full h-fit min-h-screen ml-[75px] md:ml-[245px]`}>
             <SWRConfigContext>{children}</SWRConfigContext>
           </section>
         </AuthContext>

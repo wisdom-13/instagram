@@ -21,7 +21,7 @@ export default async function HomePage() {
             <FollowingBar />
             <PostList />
           </div>
-          <div className='ml-8'>
+          <div className='ml-8 hidden md:block'>
             <SideBar user={user} />
           </div>
         </div>

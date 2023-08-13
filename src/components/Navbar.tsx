@@ -10,6 +10,11 @@ import SearchIcon from './ui/icons/SearchIcon';
 import { usePathname } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Avatar from './Avatar';
+import { InstagramIcon } from './ui/icons';
+import MenuIcon from './ui/icons/MenuIcon';
+import LogOutIcon from './ui/icons/LogoutIcon';
+import LoginIcon from './ui/icons/LoginIcon';
+import LogoutIcon from './ui/icons/LogoutIcon';
 
 const menu = [
   {
@@ -38,10 +43,14 @@ export default function Navbar() {
   const user = session?.user;
 
   return (
-    <div className='flex flex-col justify-between w-[245px] max-w-sm h-screen	p-6 bg-white border border-r-gray-200 fixed'>
+    <div className='flex flex-col justify-between w-[75px] md:w-[245px] max-w-sm h-screen	p-6 bg-white border border-r-gray-200 fixed'>
       <div>
         <Link href='/'>
-          <h1 className='mt-4 mb-9 text-2xl font-bold'>Instantgram</h1>
+          <h1 className='h-[32px] mt-4 mb-9 text-2xl font-bold'>
+            <span className='hidden md:block'>Instantgram</span>
+            <InstagramIcon className='md:hidden' />
+          </h1>
+
         </Link>
         <nav>
           <ul>
@@ -53,7 +62,7 @@ export default function Navbar() {
                       ? item.clickedIcon
                       : item.icon
                     }
-                    <span className='font-semibold'>{item.title}</span>
+                    <span className='font-semibold hidden md:block'>{item.title}</span>
                   </Link>
                 </li>)
             }
@@ -61,23 +70,26 @@ export default function Navbar() {
               <li>
                 <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={`/user/${user.username}`}>
                   <Avatar size='small' image={user.image} />
-                  <span className='font-semibold ml-3'>프로필</span>
+                  <span className='font-semibold ml-3 hidden md:block'>프로필</span>
                 </Link>
               </li>
             }
           </ul>
         </nav>
       </div>
+
       {
-        session ? (
-          <button className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' onClick={() => signOut()}>
-            Sign out
-          </button>
-        ) : (
-          <button className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' onClick={() => signIn()}>
-            Sign in
-          </button>
-        )
+        <button className='flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' onClick={() => session ? signOut() : signIn()}>
+          <span className='md:block hidden'>{session ? 'Sign out' : 'Sign out'}</span>
+          {
+            session ? (
+              <LogoutIcon className='md:hidden' />
+            ) : (
+              <LoginIcon className='md:hidden' />
+            )
+          }
+
+        </button>
       }
 
     </div>
