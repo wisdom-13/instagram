@@ -32,7 +32,7 @@ function getcontainerStyle(size: AvatarSize, highlight: boolean): string {
       sizeStyle = 'w-[66px] h-[66px]';
       break;
     case 'large':
-      sizeStyle = 'w-[150px] h-[150px]';
+      sizeStyle = 'w-[77px] h-[77px] md:w-[150px] md:h-[150px]';
       break;
   }
 
