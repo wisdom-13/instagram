@@ -43,12 +43,13 @@ export default function Navbar() {
   const user = session?.user;
 
   return (
-    <div className='flex flex-col justify-between w-[75px] md:w-[245px] max-w-sm h-screen	p-6 bg-white border border-r-gray-200 fixed'>
-      <div>
+    <div className='flex flex-col items-center justify-between w-[75px] pt-6 max-w-sm h-screen bg-white border border-r-gray-200 fixed
+    md:items-start md:w-[245px] md:p-6'>
+      <div className='md:w-full'>
         <Link href='/'>
           <h1 className='h-[32px] mt-4 mb-9 text-2xl font-bold'>
             <span className='hidden md:block'>Instantgram</span>
-            <InstagramIcon className='md:hidden' />
+            <InstagramIcon className='md:hidden text-center m-auto' />
           </h1>
 
         </Link>
@@ -57,7 +58,7 @@ export default function Navbar() {
             {
               menu.map(item =>
                 <li key={item.href}>
-                  <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={item.href}>
+                  <Link className='group flex items-center text-md py-4 px-3 md:pr-0 my-1 md:-ml-3 rounded-lg hover:bg-gray-50' href={item.href}>
                     {pathName == item.href
                       ? item.clickedIcon
                       : item.icon
@@ -68,7 +69,7 @@ export default function Navbar() {
             }
             {user &&
               <li>
-                <Link className='group flex items-center text-md py-4 pl-3 my-1 -ml-3 rounded-3xl hover:bg-gray-50' href={`/user/${user.username}`}>
+                <Link className='group flex items-center text-md py-4 pl-3 my-1 md:-ml-3 rounded-3xl hover:bg-gray-50' href={`/user/${user.username}`}>
                   <Avatar size='small' image={user.image} />
                   <span className='font-semibold ml-3 hidden md:block'>프로필</span>
                 </Link>
