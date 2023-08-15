@@ -10,7 +10,7 @@ export default function PostList() {
     <>
       {loading &&
         <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3 py-10 text-center">
-          <GridSpinner color='red' />
+          <GridSpinner />
         </div>
       }
       {

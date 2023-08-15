@@ -33,7 +33,7 @@ export default function UserSearch() {
         </form>
       </div>
       <div className="p-5">
-        {isLoading && <PropagateLoader className="text-center mt-10" size={8} color='red' />}
+        {isLoading && <PropagateLoader className="text-center mt-10" size={8} color='blue' />}
         {error && <p className="text-gray-600 text-center text-sm">사용자를 검색하는 중 문제가 발생하였습니다.</p>}
         {!isLoading && !error && users?.length === 0 && <p className="text-gray-600 text-center text-sm">일치하는 사용자 정보를 찾을 수 없습니다.</p>}
         {users && users.map((user) =>

@@ -13,7 +13,7 @@ export default function FollowingBar() {
     <section>
       <div className="w-[470px] bg-white p-3 border border-gray-200 rounded-lg text-center min-h-[112px] overflow-x-auto pr-0 relative z-0">
         {loading ? (
-          <PropagateLoader className="mt-[35px]" size={8} color='red' />
+          <PropagateLoader className="mt-[35px]" size={8} color='blue' />
         ) : (
           (!users || users.length === 0) && <p className="mt-[25px]">{`You don't have following`}</p>
         )}
