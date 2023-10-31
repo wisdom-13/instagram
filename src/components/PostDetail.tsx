@@ -14,11 +14,11 @@ export default function PostDetail({ post }: Props) {
   const comments = data?.comments;
 
   return (
-    <section className="flex w-full h-full bg-black">
-      <div className="relative basis-1/2">
+    <section className="flex w-full h-full bg-black rounded-r-md">
+      <div className="relative basis-3/5">
         <Image src={image} className="object-contain" alt={`photo by ${username}`} fill sizes='650px' priority />
       </div>
-      <div className="bg-white basis-1/2 flex flex-col text-sm">
+      <div className="bg-white basis-2/5 flex flex-col text-sm rounded-r-md">
         <PostUserAvatar image={userImage} username={username} />
         <ul className="border-t border-gray-200 h-full overflow-y-auto">
           {comments && comments.map(({ image, username: commentUsername, comment }, index) => <li key={index}>
@@ -31,7 +31,6 @@ export default function PostDetail({ post }: Props) {
         </ul>
         <div>
           <ActionBar post={post} onComment={postComment} />
-
         </div>
       </div>
     </section>
