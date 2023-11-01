@@ -9,6 +9,7 @@ import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
 import MenuModal from './MenuModal';
 import { useRouter } from 'next/navigation';
+import DeleteConfirm from './ui/modal/DeleteConfirm';
 
 type Props = {
   image: string;
@@ -44,7 +45,8 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
       {
         openModal && <ModalPortal>
           <MenuModal onClose={() => setOpenModal(false)}>
-            <PostMenu onDelete={() => handleDelete()} onClose={() => setOpenModal(false)} />
+            {/* <PostMenu onDelete={() => handleDelete()} onClose={() => setOpenModal(false)} /> */}
+            <DeleteConfirm onDelete={() => handleDelete()} onClose={() => setOpenModal(false)} />
           </MenuModal>
         </ModalPortal>
       }
