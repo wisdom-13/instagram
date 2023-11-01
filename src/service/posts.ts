@@ -148,3 +148,7 @@ export async function createPost(userId: string, text: string, file: Blob) {
       );
     });
 }
+
+export async function deletePost(postId: string) {
+  return client.delete(postId)
+}

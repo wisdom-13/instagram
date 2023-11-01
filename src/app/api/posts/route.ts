@@ -1,4 +1,4 @@
-import { createPost, getFollowingPostsOf } from '@/service/posts';
+import { createPost, deletePost, getFollowingPostsOf } from '@/service/posts';
 import { NextResponse, NextRequest } from 'next/server';
 import { withSessionUser } from '@/util/session';
 
@@ -21,5 +21,19 @@ export async function POST(req: NextRequest) {
 
     return createPost(user.id, text, file) //
       .then((data) => NextResponse.json(data));
+  })
+}
+
+export async function PUT(req: NextRequest) {
+  return withSessionUser(async () => {
+    const { postId } = await req.json();
+
+    if (postId == null) {
+      return new Response('Bad Request', { status: 400 });
+    }
+
+    return deletePost(postId)
+      .then(res => NextResponse.json(res))
+      .catch(error => new Response(JSON.stringify(error), { status: 500 }))
   })
 }

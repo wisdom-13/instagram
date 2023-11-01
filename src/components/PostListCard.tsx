@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function PostListCard({ post, priority = false }: Props) {
-  const { userImage, username, image, comments, text } = post;
+  const { id, userImage, username, image, comments, text } = post;
   const [openModal, setOpenModal] = useState(false);
   const { postComment } = usePosts();
   const handlePostComment = (comment: Comment) => {
@@ -25,7 +25,7 @@ export default function PostListCard({ post, priority = false }: Props) {
 
   return (
     <div className="w-[470px] bg-white border border-gray-200 rounded-lg mt-3">
-      <PostUserAvatar image={userImage} username={username} />
+      <PostUserAvatar image={userImage} username={username} postId={id} />
       <div>
         <Image
           className="w-full object-cover aspect-square"

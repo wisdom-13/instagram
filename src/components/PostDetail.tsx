@@ -19,7 +19,7 @@ export default function PostDetail({ post }: Props) {
         <Image src={image} className="object-contain" alt={`photo by ${username}`} fill sizes='650px' priority />
       </div>
       <div className="bg-white basis-2/5 flex flex-col text-sm rounded-r-md">
-        <PostUserAvatar image={userImage} username={username} />
+        <PostUserAvatar image={userImage} username={username} postId={id} />
         <ul className="border-t border-gray-200 h-full overflow-y-auto">
           {comments && comments.map(({ image, username: commentUsername, comment }, index) => <li key={index}>
             <div className="flex items-center p-3">
