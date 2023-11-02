@@ -20,6 +20,7 @@ type Props = {
 export default function PostUserAvatar({ image, username, postId }: Props) {
   const { user: loggedInUser } = useMe();
   const [openModal, setOpenModal] = useState(false);
+  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
   const router = useRouter();
 
   function handleDelete() {
@@ -33,6 +34,11 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
     });
   }
 
+  function closeModal() {
+    setOpenModal(false);
+    setOpenDeleteConfirm(false);
+  }
+
   return (
     <div className="flex items-center justify-between p-3">
       <div className='flex items-center'>
@@ -44,9 +50,15 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
       }
       {
         openModal && <ModalPortal>
-          <MenuModal onClose={() => setOpenModal(false)}>
-            {/* <PostMenu onDelete={() => handleDelete()} onClose={() => setOpenModal(false)} /> */}
-            <DeleteConfirm onDelete={() => handleDelete()} onClose={() => setOpenModal(false)} />
+          <MenuModal onClose={closeModal}>
+            {
+              !openDeleteConfirm
+              && <PostMenu onDelete={() => setOpenDeleteConfirm(!openDeleteConfirm)} onClose={closeModal} />
+            }
+            {
+              openDeleteConfirm
+              && <DeleteConfirm onDelete={() => handleDelete()} onClose={closeModal} />
+            }
           </MenuModal>
         </ModalPortal>
       }
