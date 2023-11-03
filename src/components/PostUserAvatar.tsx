@@ -6,9 +6,7 @@ import MoreIcon from './ui/icons/MoreIcon';
 import { useState } from 'react';
 import PostMenu from './ui/modal/PostMenu';
 import ModalPortal from './ui/ModalPortal';
-import PostModal from './PostModal';
 import MenuModal from './MenuModal';
-import { useRouter } from 'next/navigation';
 import DeleteConfirm from './ui/modal/DeleteConfirm';
 
 type Props = {
@@ -21,7 +19,6 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
   const { user: loggedInUser } = useMe();
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
-  const router = useRouter();
 
   function handleDelete() {
     console.log('delete')
@@ -29,8 +26,7 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
       method: 'PUT',
       body: JSON.stringify({ postId }),
     }).then(() => {
-      console.log('success')
-      router.push('/');
+      location.reload();
     });
   }
 
