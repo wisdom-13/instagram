@@ -8,6 +8,7 @@ import PostMenu from './ui/modal/PostMenu';
 import ModalPortal from './ui/ModalPortal';
 import MenuModal from './MenuModal';
 import DeleteConfirm from './ui/modal/DeleteConfirm';
+import NewPost from './NewPost';
 
 type Props = {
   image: string;
@@ -47,14 +48,15 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
       {
         openModal && <ModalPortal>
           <MenuModal onClose={closeModal}>
-            {
+            {/* {
               !openDeleteConfirm
               && <PostMenu onDelete={() => setOpenDeleteConfirm(!openDeleteConfirm)} onClose={closeModal} />
             }
             {
               openDeleteConfirm
               && <DeleteConfirm onDelete={() => handleDelete()} onClose={closeModal} />
-            }
+            } */}
+            <NewPost username={username} image={image} />
           </MenuModal>
         </ModalPortal>
       }

@@ -9,9 +9,10 @@ import GridSpinner from './ui/GridSpinner';
 import MediaIcon from './ui/icons/MediaIcon';
 
 type Props = {
-  user: AuthUser;
+  username: string;
+  image: string;
 };
-export default function NewPost({ user: { username, image } }: Props) {
+export default function NewPost({ username, image }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState(false);
