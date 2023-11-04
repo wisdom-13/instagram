@@ -6,7 +6,7 @@ type Props = {
 export default function DeleteConfirm({ onDelete, onClose }: Props) {
 
   return (
-    <div className='bg-white rounded-lg'>
+    <div className='w-[300px] bg-white rounded-lg'>
       <ul className='text-sm text-center divide-y divide-slate-200 flex-col cursor-pointer'>
         <li className='py-6'>
           <h3 className='text-xl'>게시물을 삭제할까요?</h3>

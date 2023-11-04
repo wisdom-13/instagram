@@ -68,7 +68,7 @@ export default function NewPost({ username, image }: Props) {
   };
 
   return (
-    <div className='w-[1000px] h-[calc(100%-5rem)]'>
+    <div className='w-[1000px] h-[80%]'>
       {error && (
         <p className='w-full bg-red-500 text-white rounded-md px-3 py-1 text-center font-bold mb-3'>{error}</p>
       )}

@@ -12,7 +12,7 @@ export default function MenuModal({ onClose, children }: Props) {
           onClose();
         }
       }}>
-      <div className="w-[300px] max-w-7xl max-h-7xl">
+      <div className="flex items-center h-full">
         {children}
       </div>
     </section>
