@@ -1,16 +1,29 @@
 import { ModalsDispatchContext, ModalsStateContext } from '@/context/ModalContext';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
 };
 
-const ModalsProvider = ({ children }: Props) => {
-  const [openedModals, setOpenedModals] = useState([]);
 
-  const open = () => { };
-  const close = () => { };
-  const dispatch = { open, close };
+const ModalsProvider = ({ children }: Props) => {
+  const [openedModals, setOpenedModals] = useState<{ Component: React.ReactNode, props: any }[]>([]);
+
+  const open = (Component: React.ReactNode, props: any) => {
+    setOpenedModals((modals) => {
+      return [...modals, { Component, props }];
+    });
+  };
+
+  const close = (Component: React.ReactNode) => {
+    setOpenedModals((modals) => {
+      return modals.filter((modal) => {
+        return modal.Component !== Component;
+      });
+    });
+  };
+
+  const dispatch = useMemo(() => ({ open, close }), []);
 
   return (
     <ModalsStateContext.Provider value={openedModals}>
