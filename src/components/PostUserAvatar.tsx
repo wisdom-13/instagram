@@ -18,8 +18,12 @@ type Props = {
 
 export default function PostUserAvatar({ image, username, postId }: Props) {
   const { user: loggedInUser } = useMe();
+
   const [openModal, setOpenModal] = useState(false);
-  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+
+  function closeModal() {
+    setOpenModal(false);
+  }
 
   function handleDelete() {
     console.log('delete')
@@ -29,11 +33,6 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
     }).then(() => {
       location.reload();
     });
-  }
-
-  function closeModal() {
-    setOpenModal(false);
-    setOpenDeleteConfirm(false);
   }
 
   return (
@@ -48,15 +47,10 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
       {
         openModal && <ModalPortal>
           <MenuModal onClose={closeModal}>
-            {/* {
-              !openDeleteConfirm
-              && <PostMenu onDelete={() => setOpenDeleteConfirm(!openDeleteConfirm)} onClose={closeModal} />
-            }
-            {
-              openDeleteConfirm
-              && <DeleteConfirm onDelete={() => handleDelete()} onClose={closeModal} />
-            } */}
-            <NewPost username={username} image={image} />
+            <PostMenu onClose={closeModal}
+              deleteModal={<DeleteConfirm key='deleteModal' onDelete={() => handleDelete()} onClose={closeModal} />}
+              updateModal={<NewPost key='updateModal' username={username} image={image} postId={postId} />}
+            />
           </MenuModal>
         </ModalPortal>
       }

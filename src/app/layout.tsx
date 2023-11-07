@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import AuthContext from '@/context/AuthContext';
 import SWRConfigContext from '@/context/SWRConfigContext';
 import { Metadata } from 'next';
+import ModalContext from '@/context/ModalContext';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 

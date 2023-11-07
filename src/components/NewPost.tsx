@@ -1,5 +1,4 @@
 'use client';
-import { AuthUser } from '@/model/user';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, DragEvent, FormEvent, useRef, useState } from 'react';
@@ -11,14 +10,16 @@ import MediaIcon from './ui/icons/MediaIcon';
 type Props = {
   username: string;
   image: string;
+  postId?: string;
 };
-export default function NewPost({ username, image }: Props) {
+export default function NewPost({ username, image, postId }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const textRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -55,7 +56,7 @@ export default function NewPost({ username, image }: Props) {
     formData.append('file', file);
     formData.append('text', textRef.current?.value ?? '');
 
-    fetch('/api/posts/', { method: 'POST', body: formData }) //
+    fetch('/api/posts/', { method: 'POST', body: formData })
       .then((res) => {
         if (!res.ok) {
           setError(`${res.status} ${res.statusText}`);
