@@ -84,7 +84,9 @@ export default function NewPost({ username, image, postId }: Props) {
 
         <div className='flex items-center h-[48px] justify-between border-b border-gray-200'>
           <div className='w-[80px]'></div>
-          <h1 className='font-semibold'>새 게시물 만들기</h1>
+          <h1 className='font-semibold'>
+            {postId ? '정보 수정' : '새 게시물 만들기'}
+          </h1>
           <button
             className={`font-semibold w-[80px] text-sm ${file ? 'text-blue-600' : 'text-blue-200'}`}
             disabled={!file}>
