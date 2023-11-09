@@ -6,13 +6,14 @@ import PostUserAvatar from './PostUserAvatar';
 import Button from './ui/Button';
 import GridSpinner from './ui/GridSpinner';
 import MediaIcon from './ui/icons/MediaIcon';
+import { FullPost } from '@/model/post';
 
 type Props = {
   username: string;
   image: string;
-  postId?: string;
+  post?: FullPost;
 };
-export default function NewPost({ username, image, postId }: Props) {
+export default function NewPost({ username, image, post }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState(false);
@@ -85,7 +86,7 @@ export default function NewPost({ username, image, postId }: Props) {
         <div className='flex items-center h-[48px] justify-between border-b border-gray-200'>
           <div className='w-[80px]'></div>
           <h1 className='font-semibold'>
-            {postId ? '정보 수정' : '새 게시물 만들기'}
+            {post ? '정보 수정' : '새 게시물 만들기'}
           </h1>
           <button
             className={`font-semibold w-[80px] text-sm ${file ? 'text-blue-600' : 'text-blue-200'}`}
