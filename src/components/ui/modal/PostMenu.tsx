@@ -1,16 +1,32 @@
 'use client';
 
 import { useState } from 'react';
+import DeleteConfirm from './DeleteConfirm';
+import NewPost from '@/components/NewPost';
+import useFullPost from '@/hooks/post';
 
 type Props = {
+  username: string;
+  userImage: string;
+  postId: string;
   onClose: () => void;
-  deleteModal: React.ReactNode;
-  updateModal: React.ReactNode;
 };
 
-export default function PostMenu({ onClose, deleteModal, updateModal }: Props) {
+export default function PostMenu({ username, userImage, postId, onClose }: Props) {
   const [onDeleteModal, setOnDeleteModal] = useState(false);
   const [onUpdateModal, setOnUpdateModal] = useState(false);
+
+  const { post } = useFullPost(postId);
+
+  function handleDelete() {
+    console.log('delete')
+    fetch('/api/posts', {
+      method: 'PUT',
+      body: JSON.stringify({ postId }),
+    }).then(() => {
+      location.reload();
+    });
+  }
 
   return (
     <>
@@ -24,8 +40,8 @@ export default function PostMenu({ onClose, deleteModal, updateModal }: Props) {
           </ul>
         </div>
       }
-      {onDeleteModal && deleteModal}
-      {onUpdateModal && updateModal}
+      {onDeleteModal && <DeleteConfirm key='deleteModal' onDelete={() => handleDelete()} onClose={onClose} />}
+      {onUpdateModal && <NewPost key='updateModal' username={username} image={userImage} post={post} />}
     </>
   );
 }

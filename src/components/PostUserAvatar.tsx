@@ -7,8 +7,6 @@ import { useState } from 'react';
 import PostMenu from './ui/modal/PostMenu';
 import ModalPortal from './ui/ModalPortal';
 import MenuModal from './MenuModal';
-import DeleteConfirm from './ui/modal/DeleteConfirm';
-import NewPost from './NewPost';
 
 type Props = {
   image: string;
@@ -25,16 +23,6 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
     setOpenModal(false);
   }
 
-  function handleDelete() {
-    console.log('delete')
-    fetch('/api/posts', {
-      method: 'PUT',
-      body: JSON.stringify({ postId }),
-    }).then(() => {
-      location.reload();
-    });
-  }
-
   return (
     <div className="flex items-center justify-between p-3">
       <div className='flex items-center'>
@@ -45,12 +33,9 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
         && <button onClick={() => setOpenModal(!openModal)}><MoreIcon /></button>
       }
       {
-        openModal && <ModalPortal>
+        postId && openModal && <ModalPortal>
           <MenuModal onClose={closeModal}>
-            <PostMenu onClose={closeModal}
-              deleteModal={<DeleteConfirm key='deleteModal' onDelete={() => handleDelete()} onClose={closeModal} />}
-              updateModal={<NewPost key='updateModal' username={username} image={image} postId={postId} />}
-            />
+            <PostMenu username={username} userImage={image} postId={postId} onClose={closeModal} />
           </MenuModal>
         </ModalPortal>
       }
