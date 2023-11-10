@@ -16,6 +16,7 @@ type Props = {
 export default function NewPost({ username, image, post }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
+  const [isFile, setIsFile] = useState(file || post?.image ? true : false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -50,12 +51,15 @@ export default function NewPost({ username, image, post }: Props) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!file) return;
+    if (!isFile) return;
 
     setLoading(true);
     const formData = new FormData();
-    formData.append('file', file);
     formData.append('text', textRef.current?.value ?? '');
+
+    if (file) {
+      formData.append('file', file);
+    }
 
     fetch('/api/posts/', { method: 'POST', body: formData })
       .then((res) => {
@@ -89,9 +93,9 @@ export default function NewPost({ username, image, post }: Props) {
             {post ? '정보 수정' : '새 게시물 만들기'}
           </h1>
           <button
-            className={`font-semibold w-[80px] text-sm ${file ? 'text-blue-600' : 'text-blue-200'}`}
-            disabled={!file}>
-            공유하기
+            className={`font-semibold w-[80px] text-sm ${isFile ? 'text-blue-600' : 'text-blue-200'}`}
+            disabled={!isFile}>
+            {post ? '완료' : '공유하기'}
           </button>
         </div>
         <div className='flex h-[calc(100%-48px)]'>
@@ -112,18 +116,18 @@ export default function NewPost({ username, image, post }: Props) {
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
-              {!file && (
+              {!isFile && (
                 <>
                   <MediaIcon className={`${dragging && 'text-blue-500'}`} />
                   <p className='text-2xl'>사진을 여기에 끌어다 놓으세요</p>
                   <Button type={'button'} className='mt-5' text='컴퓨터에서 선택' blue={true}></Button>
                 </>
               )}
-              {file &&
+              {isFile &&
                 <div className='relative w-full h-full overflow-hidden'>
                   <Image
                     className="w-full h-full object-cover aspect-square"
-                    src={URL.createObjectURL(file)}
+                    src={file ? URL.createObjectURL(file) : post?.image}
                     alt='local file'
                     width={600}
                     height={600} />
@@ -142,6 +146,7 @@ export default function NewPost({ username, image, post }: Props) {
                 rows={10}
                 required
                 ref={textRef}
+                defaultValue={post?.comments[0].comment}
               />
             </div>
           </div>
