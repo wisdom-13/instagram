@@ -7,13 +7,13 @@ import Button from './ui/Button';
 import GridSpinner from './ui/GridSpinner';
 import MediaIcon from './ui/icons/MediaIcon';
 import { FullPost } from '@/model/post';
+import { HomeUser } from '@/model/user';
 
 type Props = {
-  username: string;
-  image: string;
+  user: HomeUser;
   post?: FullPost;
 };
-export default function NewPost({ username, image, post }: Props) {
+export default function NewPost({ user: { id, username, image }, post }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
   const [isFile, setIsFile] = useState(file || post?.image ? true : false);

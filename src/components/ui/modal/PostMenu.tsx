@@ -41,7 +41,7 @@ export default function PostMenu({ username, userImage, postId, onClose }: Props
         </div>
       }
       {onDeleteModal && <DeleteConfirm key='deleteModal' onDelete={() => handleDelete()} onClose={onClose} />}
-      {onUpdateModal && <NewPost key='updateModal' username={username} image={userImage} post={post} />}
+      {onUpdateModal && <NewPost key='updateModal' user={user} post={post} />}
     </>
   );
 }

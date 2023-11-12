@@ -9,7 +9,7 @@ import ModalPortal from './ui/ModalPortal';
 import MenuModal from './MenuModal';
 
 type Props = {
-  image: string;
+  image?: string;
   username: string;
   postId?: string;
 };
@@ -18,6 +18,10 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
   const { user: loggedInUser } = useMe();
 
   const [openModal, setOpenModal] = useState(false);
+
+  if (!loggedInUser) {
+    return <></>;
+  }
 
   function closeModal() {
     setOpenModal(false);
@@ -35,7 +39,7 @@ export default function PostUserAvatar({ image, username, postId }: Props) {
       {
         postId && openModal && <ModalPortal>
           <MenuModal onClose={closeModal}>
-            <PostMenu username={username} userImage={image} postId={postId} onClose={closeModal} />
+            <PostMenu user={loggedInUser} postId={postId} onClose={closeModal} />
           </MenuModal>
         </ModalPortal>
       }
