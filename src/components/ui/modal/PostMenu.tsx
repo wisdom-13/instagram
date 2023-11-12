@@ -4,25 +4,24 @@ import { useState } from 'react';
 import DeleteConfirm from './DeleteConfirm';
 import NewPost from '@/components/NewPost';
 import useFullPost from '@/hooks/post';
+import { HomeUser } from '@/model/user';
 
 type Props = {
-  username: string;
-  userImage: string;
+  user: HomeUser;
   postId: string;
   onClose: () => void;
 };
 
-export default function PostMenu({ username, userImage, postId, onClose }: Props) {
+export default function PostMenu({ user, postId, onClose }: Props) {
   const [onDeleteModal, setOnDeleteModal] = useState(false);
   const [onUpdateModal, setOnUpdateModal] = useState(false);
 
   const { post } = useFullPost(postId);
 
   function handleDelete() {
-    console.log('delete')
-    fetch('/api/posts', {
+    fetch(`/api/posts/${postId}`, {
       method: 'PUT',
-      body: JSON.stringify({ postId }),
+      body: JSON.stringify({ userId: user?.id }),
     }).then(() => {
       location.reload();
     });
