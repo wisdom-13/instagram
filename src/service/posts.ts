@@ -152,7 +152,7 @@ export async function deletePost(postId: string) {
   return client.delete(postId)
 }
 
-export async function updatePost(userId: string, postId: string, text: string, file: Blob) {
+export async function updatePost(userId: string, postId: string, text: string, file: Blob | null) {
 
   if (file) {
     return fetch(assetsURL, {

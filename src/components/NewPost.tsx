@@ -56,12 +56,17 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
     setLoading(true);
     const formData = new FormData();
     formData.append('text', textRef.current?.value ?? '');
+    formData.append('type', post ? 'update' : 'create');
+
+    if (post) {
+      formData.append('id', post.id);
+    }
 
     if (file) {
       formData.append('file', file);
     }
 
-    fetch('/api/posts/', { method: 'POST', body: formData })
+    fetch('/api/posts/', { method: post ? 'PUT' : 'POST', body: formData })
       .then((res) => {
         if (!res.ok) {
           setError(`${res.status} ${res.statusText}`);
@@ -136,7 +141,7 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
             </label>
           </div>
           <div className='w-2/5 border-l border-gray-200'>
-            <PostUserAvatar username={username} image={image || ''} />
+            <PostUserAvatar username={username} image={image} />
             <div className='px-3 border-b border-gray-200'>
               <textarea
                 name='text'
