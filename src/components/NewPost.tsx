@@ -56,7 +56,6 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
     setLoading(true);
     const formData = new FormData();
     formData.append('text', textRef.current?.value ?? '');
-    formData.append('type', post ? 'update' : 'create');
 
     if (post) {
       formData.append('id', post.id);
@@ -72,7 +71,13 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
           setError(`${res.status} ${res.statusText}`);
           return;
         }
-        router.push('/');
+
+        if (!post) {
+          router.push('/');
+        } else {
+          location.reload();
+        }
+
       })
       .catch((err) => setError(err.toString()))
       .finally(() => setLoading(false));
