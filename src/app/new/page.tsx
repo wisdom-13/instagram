@@ -17,7 +17,7 @@ export default async function NewPostPage() {
 
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center'>
-      <NewPost username={session.user.username} image={session.user.image} />
+      <NewPost user={session.user} />
     </div>
   );
 }

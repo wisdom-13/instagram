@@ -7,10 +7,10 @@ import Button from './ui/Button';
 import GridSpinner from './ui/GridSpinner';
 import MediaIcon from './ui/icons/MediaIcon';
 import { FullPost } from '@/model/post';
-import { HomeUser } from '@/model/user';
+import { AuthUser, HomeUser } from '@/model/user';
 
 type Props = {
-  user: HomeUser;
+  user: HomeUser | AuthUser;
   post?: FullPost;
 };
 export default function NewPost({ user: { id, username, image }, post }: Props) {
