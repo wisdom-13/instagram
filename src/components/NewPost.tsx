@@ -135,12 +135,24 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
               )}
               {isFile &&
                 <div className='relative w-full h-full overflow-hidden'>
-                  <Image
-                    className="w-full h-full object-cover aspect-square"
-                    src={file ? URL.createObjectURL(file) : post?.image}
-                    alt='local file'
-                    width={600}
-                    height={600} />
+                  {
+                    post &&
+                    <Image
+                      className="w-full h-full object-cover aspect-square"
+                      src={post.image}
+                      alt='local file'
+                      width={600}
+                      height={600} />
+                  }
+                  {
+                    file &&
+                    <Image
+                      className="w-full h-full object-cover aspect-square"
+                      src={URL.createObjectURL(file)}
+                      alt='local file'
+                      width={600}
+                      height={600} />
+                  }
                 </div>
               }
             </label>
