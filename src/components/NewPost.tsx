@@ -46,6 +46,7 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
     const files = e.dataTransfer?.files;
     if (files && files[0]) {
       setFile(files[0]);
+      setIsFile(true);
     }
   };
 
@@ -136,19 +137,19 @@ export default function NewPost({ user: { id, username, image }, post }: Props) 
               {isFile &&
                 <div className='relative w-full h-full overflow-hidden'>
                   {
-                    post &&
+                    file &&
                     <Image
                       className="w-full h-full object-cover aspect-square"
-                      src={post.image}
+                      src={URL.createObjectURL(file)}
                       alt='local file'
                       width={600}
                       height={600} />
                   }
                   {
-                    file &&
+                    post &&
                     <Image
                       className="w-full h-full object-cover aspect-square"
-                      src={URL.createObjectURL(file)}
+                      src={post.image}
                       alt='local file'
                       width={600}
                       height={600} />
