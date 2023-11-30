@@ -1,38 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 
 
-## Getting Started
+### 프로젝트 개요
 
-First, run the development server:
+목적 : 소셜 미디어(인스타그램) 플랫폼 구현
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+목표 : 사용자가 사진을 공유하고, 팔로우/팔로잉 관계를 형성할 수 있는 서비스 제공 기술 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 개발 환경
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+React.js, Next.js, Typescript, NextAuth.js, Sanity, SWR, Tailwindcss
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 개발 기능
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- 사용자 회원 가입 및 로그인 (NextAuth)
+- 게시글(이미지) 업로드
+- 포스트 관리 (수정, 삭제)
+- 팔로우한 유저의 게시글 피드 조회
+- 좋아요, 덧글 작성, 북마크 저장
+- 유저 검색, 팔로우/팔로잉
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 배운점
 
-## Learn More
+- CSR와 SSR의 차이점을 알게 되었고, 기능에 따른 적절한 렌더링 방식에 대해 학습했습니다.
+- NextAuth를 사용하여 사용자 인증과 로그인 방법을 익혔습니다.
+- SWR을 사용하여 데이터를 가져오고 실시간으로 업데이트 하는 방법을 익혔습니다.
+- 데이터를 호출하는 부분을 hook으로 만들어 코드를 최적화하고 성능을 개선하는 방법을 익혔습니다.
 
-To learn more about Next.js, take a look at the following resources:
+### 차후 개선점
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 로딩중 스켈레톤 적용
+- 해시태그로 포스트를 검색
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**데모 페이지** : https://instagram-six-delta.vercel.app/
